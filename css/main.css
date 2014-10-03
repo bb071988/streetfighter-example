@@ -2,6 +2,16 @@ body {
   background-color: black;
 }
 
+.instructions {
+  background-color:blue;
+  color:white;
+  display:inline-block;
+    position:absolute;
+    top: 125px;
+    left:20px;
+    padding:5px;
+  }
+
 .main {
   background-color: white;
   margin-top: 110px;
