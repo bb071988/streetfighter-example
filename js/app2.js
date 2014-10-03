@@ -4,24 +4,30 @@ $(document).ready(function(){
 
 	.mouseenter(function() {
 
-		hideAll();
+		$('.ryu-still').hide();
 		$('.ryu-ready').show();
-		
+		$('.ryu-throwing').hide();
+		$('.ryu-cool').hide();
+
 	}) // end mouseenter
 
 
 	.mouseleave(function(){
 
-		hideAll();
+		$('.ryu-ready').hide();
+		$('.ryu-throwing').hide();
 		$('.ryu-still').show();
-		
+		$('.ryu-cool').hide(); // added to stop ryu from reappearing on mouseleave
+	
 	})
 
 
 	.mousedown(function(){
 		//stopPropagation();
 		playHadouken();
-		hideAll();
+		$('.ryu-still').hide();
+		$('.ryu-ready').hide();
+		$('ryu-cool').hide();
 		$('.ryu-throwing').show();
 		$('.hadouken').finish().show()
 		.animate(
@@ -34,7 +40,10 @@ $(document).ready(function(){
 
 
 	.mouseup(function(){
-		hideAll();
+		// console.log('mouse up');
+
+		$('.ryu-throwing').hide();
+		$('.ryu-cool').hide();  //  added to fix bug with extra ryu
 		$('.ryu-ready').show();
 	});  // end mouseup ryu goes back to his ready position
 
@@ -43,16 +52,19 @@ $(document).ready(function(){
 	.keydown(function(event){
 	 	if (event.which == 88)
 	 	{
-	 		hideAll();
+	 		$('.ryu-still').hide();
+			$('.ryu-ready').hide();
+			$('.ryu-throwing').hide();
 			$('.ryu-cool').show(); 
 		}
 	})
 
 	.keyup(function(){
 			//alert("x key is let up");
-			
-			hideAll();
 			$('.ryu-still').show();
+			$('.ryu-ready').hide();
+			$('.ryu-throwing').hide();
+			$('.ryu-cool').hide(); 
 
 		});  // semicolon should come after methods used on the single selection
 	
@@ -68,22 +80,16 @@ function playHadouken () {
   $('#hadouken-sound')[0].play();
 };
 
-function hideAll() {
-	$('.ryu-still').hide();
-	$('.ryu-ready').hide();
-	$('.ryu-throwing').hide();
-	$('.ryu-cool').hide(); 
-};
 
 
-/* 1. after hadouken throw ryu ready is apearing under existing ry div
+
+/* after hadouken throw ryu ready is apearing under existing ry div
 seems like it's not properly hiding ryu ready after haduken throw.
+
 bubble? or possibly just need to hide ryu ready. 
 
-1. hideAll function fixed this
-
-2. after pressing x - next mouseclick does not throw hadouken
-second mouse click does. Is Ryu not in focus or other issue?
-*/
+hiding all the divs in all the functions seems to fix the bug
+there's still sometimes the need to mousedown 2x on ryu to get him
+to shoot the hadouken after he does the cool pose.*/
 
 
